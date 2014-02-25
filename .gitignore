@@ -156,5 +156,5 @@ $RECYCLE.BIN/
 .DS_Store
 
 #NuGet
-packages/
-!repositories.config
+packages/*
+!packages/repositories.config
