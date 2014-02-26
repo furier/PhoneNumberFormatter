@@ -119,8 +119,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>@PowerShell Copy-Item $(TargetPath) $(ProjectDir)\..\Deploy
-@PowerShell Copy-Item $(TargetDir)\CountryCodes.txt $(ProjectDir)\..\Deploy</PostBuildEvent>
+    <PostBuildEvent>@PowerShell Copy-Item $(TargetPath) $(ProjectDir)\..\Deploy; Copy-Item $(TargetDir)\CountryCodes.txt $(ProjectDir)\..\Deploy</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
