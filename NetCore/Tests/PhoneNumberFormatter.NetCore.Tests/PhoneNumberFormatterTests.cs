@@ -134,6 +134,12 @@ namespace PhoneNumberFormatter.Tests
             ParameterizedPhoneNumberFormatterTest("+4733369999", "Norway", "+47 333 69 999");
         }
 
+        [TestMethod]
+        public void PhoneNumberFormatterTest_OnlyNumbers_WithCountryNorway4()
+        {
+            ParameterizedPhoneNumberFormatterTest("+4633369999", "Norway", "+47 333 69 999");
+        }
+
         /// <summary>   parameterized phone number formatter test method. </summary>
         /// <remarks>   Sander.struijk, 25.02.2014. </remarks>
         /// <param name="phoneNumberInput">             The phone number. </param>

@@ -51,7 +51,7 @@ namespace PhoneNumberFormatter
 
             if(PhoneNumberAlreadyHasCountryCode(countryMetaData, cleanedPhoneNumber))
             {
-                CountryCode = countryCode;
+                CountryCode = !string.IsNullOrEmpty(countryMetaData.CountryCode) ? countryMetaData.CountryCode : countryCode;
                 Number = phoneNumber;
             }
             else if(CountryMetaDataHasCountryCode(countryMetaData))
