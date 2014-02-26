@@ -19,37 +19,42 @@ using Windows.Storage;
 
 namespace PhoneNumberFormatter
 {
-    /// <summary>   The country code retriever. </summary>
-    /// <remarks>   Sander.struijk, 25.02.2014. </remarks>
-    public static class CountryCodeRetriever
+    /// <summary>   A country meta data retriever. </summary>
+    /// <remarks>   Sander.struijk, 26.02.2014. </remarks>
+    public static class CountryMetaDataRetriever
     {
-        /// <summary>   The country codes. </summary>
-        private static readonly IDictionary<string, CountryMetaData> CountryCodes;
+        /// <summary>   The countries meta data. </summary>
+        private static readonly IDictionary<string, CountryMetaData> CountryMetaDatas;
 
         /// <summary>   true if this object has been initialized. </summary>
         private static bool _hasBeenInitialized;
 
         /// <summary>   Default constructor. </summary>
         /// <remarks>   Sander.struijk, 25.02.2014. </remarks>
-        static CountryCodeRetriever()
+        static CountryMetaDataRetriever()
         {
-            CountryCodes = new Dictionary<string, CountryMetaData>();
+            CountryMetaDatas = new Dictionary<string, CountryMetaData>();
             _hasBeenInitialized = false;
         }
 
-        /// <summary>   Initializes the Country Code Retriever. </summary>
+        /// <summary>   Initializes the country meta data retriever. </summary>
         /// <remarks>   Sander.struijk, 25.02.2014. </remarks>
         public static async Task Initialize()
         {
             if(_hasBeenInitialized) return;
 
             var readCountryCodesFile = await ReadTextFile("CountryCodes.txt");
-            foreach(var codeAndContryAliases in readCountryCodesFile.Where(line => !line.StartsWith("#") || string.IsNullOrEmpty(line)).Select(line => line.Split('|')))
+            foreach(var line in readCountryCodesFile)
             {
-                var countryMetaData = new CountryMetaData(codeAndContryAliases[0], codeAndContryAliases[1], codeAndContryAliases[2]);
-                for(var i = 3; i < codeAndContryAliases.Length; i++)
+                if (line.StartsWith("#") || string.IsNullOrEmpty(line)) continue;
+
+                var countryData = line.Split('|');
+                var countryMetaData = new CountryMetaData(countryData[0], countryData[1], countryData[2]);
+                for(var i = 3; i < countryData.Length; i++)
                 {
-                    CountryCodes.Add(codeAndContryAliases[i].ToLower(), countryMetaData);
+                    var key = countryData[i].ToLower();
+                    if(CountryMetaDatas.ContainsKey(key)) continue;
+                    CountryMetaDatas.Add(key, countryMetaData);
                 }
             }
             _hasBeenInitialized = true;
@@ -69,12 +74,19 @@ namespace PhoneNumberFormatter
             return await FileIO.ReadLinesAsync(file);
         }
 
+        /// <summary>   Gets country meta data. </summary>
+        /// <remarks>   Sander.struijk, 26.02.2014. </remarks>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <exception cref="Exception">                Thrown when no country meta data can be found for the requested country. </exception>
+        /// <param name="country">  The country name. </param>
+        /// <returns>   The country meta data. </returns>
         public static CountryMetaData GetCountryMetaData(string country)
         {
             if (string.IsNullOrEmpty(country)) throw new ArgumentNullException("country");
             country = country.ToLower();
-            if(CountryCodes.ContainsKey(country))
-                return CountryCodes[country];
+            if(CountryMetaDatas.ContainsKey(country))
+                return CountryMetaDatas[country];
             throw new Exception("The country code dictionary does not contain a country code for the supplied country.");
         }
     }

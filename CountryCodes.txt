@@ -13,4 +13,4 @@
 47|8|3.2.3|norge|norway|nor|no
 
 #Sweedish phone number country code metadata.
-46|8|3.2.3|sverige|sweeden|swe|se
+46|8|3.2.3|sverige|sweden|swe|se

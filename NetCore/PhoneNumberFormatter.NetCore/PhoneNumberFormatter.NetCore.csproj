@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CountryCodeRetriever.cs" />
+    <Compile Include="CountryMetaData.cs" />
+    <Compile Include="CountryMetaDataRetriever.cs" />
+    <Compile Include="PhoneNumber.cs" />
     <Compile Include="PhoneNumberFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
