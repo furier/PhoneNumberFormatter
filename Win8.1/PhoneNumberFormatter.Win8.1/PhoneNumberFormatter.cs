@@ -37,6 +37,23 @@ namespace PhoneNumberFormatter
             return formattedPhoneNumber;
         }
 
+        /// <summary>   Formats an unformatted phone number, and adds country code if country is
+        ///             supplied. </summary>
+        /// <remarks>   Sander.struijk, 25.02.2014. </remarks>
+        /// <exception cref="ArgumentNullException">    Thrown when one or more required arguments are
+        ///                                             null. </exception>
+        /// <param name="phoneNumber">  The phone number. </param>
+        /// <param name="countryName">      (Optional) The country. </param>
+        /// <returns>   The formatted value. </returns>
+        public static string Format(string phoneNumber, string countryName = "")
+        {
+            CountryMetaDataRetriever.Initialize();
+            if (string.IsNullOrEmpty(phoneNumber)) throw new ArgumentNullException("phoneNumber");
+            var countryMetaData = GetCountryMetaData(countryName);
+            var formattedPhoneNumber = new PhoneNumber(countryMetaData, phoneNumber).ToString();
+            return formattedPhoneNumber;
+        }
+
         /// <summary>   Gets country meta data. </summary>
         /// <remarks>   Sander.struijk, 25.02.2014. </remarks>
         /// <param name="countryName">  The country. </param>

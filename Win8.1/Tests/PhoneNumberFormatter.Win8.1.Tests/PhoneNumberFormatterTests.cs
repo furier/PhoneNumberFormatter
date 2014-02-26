@@ -1,17 +1,5 @@
-﻿#region File Header
-
-// // ***********************************************************************
-// // Author           : Sander Struijk
-// // ***********************************************************************
-
-#endregion
-
-#region Using statements
-
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-
-#endregion
 
 namespace PhoneNumberFormatter.Tests
 {
@@ -147,7 +135,7 @@ namespace PhoneNumberFormatter.Tests
         /// <param name="phoneNumberExpectedResult">    The expected phone number result. </param>
         private static void ParameterizedPhoneNumberFormatterTest(string phoneNumberInput, string countryInput, string phoneNumberExpectedResult)
         {
-            var result = PhoneNumberFormatter.FormatAsync(phoneNumberInput, countryInput).Result;
+            var result = PhoneNumberFormatter.Format(phoneNumberInput, countryInput);
             result.Should().Be(phoneNumberExpectedResult);
         }
     }
