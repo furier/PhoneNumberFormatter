@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>PhoneNumberFormatter</id>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
         <title>Phone Number Formatter</title>
         <authors>Sander Struijk</authors>
         <owners>Sander Struijk</owners>
@@ -14,5 +14,6 @@
         <file src="CountryCodes.txt" target="content\CountryCodes.txt" />
         <file src="NetCore\Deploy\PhoneNumberFormatter.dll" target="lib\net45\PhoneNumberFormatter.dll" />
         <file src="Win8.1\Deploy\PhoneNumberFormatter.dll" target="lib\netcore451\PhoneNumberFormatter.dll" />
+        <file src="tools\install.ps1" target="tools\install.ps1" />
     </files>
 </package>

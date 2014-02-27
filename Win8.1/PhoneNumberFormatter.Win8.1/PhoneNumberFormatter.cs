@@ -30,7 +30,7 @@ namespace PhoneNumberFormatter
         /// <returns>   The formatted value. </returns>
         public static async Task<string> FormatAsync(string phoneNumber, string countryName = "")
         {
-            await CountryMetaDataRetriever.Initialize();
+            await CountryMetaDataRetriever.InitializeAsync();
             if(string.IsNullOrEmpty(phoneNumber)) throw new ArgumentNullException("phoneNumber");
             var countryMetaData = GetCountryMetaData(countryName);
             var formattedPhoneNumber = new PhoneNumber(countryMetaData, phoneNumber).ToString();
@@ -47,11 +47,13 @@ namespace PhoneNumberFormatter
         /// <returns>   The formatted value. </returns>
         public static string Format(string phoneNumber, string countryName = "")
         {
-            CountryMetaDataRetriever.Initialize();
             if (string.IsNullOrEmpty(phoneNumber)) throw new ArgumentNullException("phoneNumber");
-            var countryMetaData = GetCountryMetaData(countryName);
-            var formattedPhoneNumber = new PhoneNumber(countryMetaData, phoneNumber).ToString();
-            return formattedPhoneNumber;
+            return CountryMetaDataRetriever.InitializeAsync().ContinueWith(task =>
+            {
+                var countryMetaData = GetCountryMetaData(countryName);
+                var formattedPhoneNumber = new PhoneNumber(countryMetaData, phoneNumber).ToString();
+                return formattedPhoneNumber;
+            }).Result;
         }
 
         /// <summary>   Gets country meta data. </summary>
@@ -78,7 +80,6 @@ namespace PhoneNumberFormatter
                 throw new ArgumentNullException("s");
             if (partLength <= 0)
                 throw new ArgumentException("Part length has to be positive.", "partLength");
-
             for (var i = 0; i < s.Length; i += partLength)
                 yield return s.Substring(i, Math.Min(partLength, s.Length - i));
         }
