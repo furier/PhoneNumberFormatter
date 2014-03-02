@@ -3,11 +3,6 @@
 // // ***********************************************************************
 // // Author           : Sander Struijk
 // // ***********************************************************************
-// // <copyright file="PhoneNumber.cs" company="Bouvet ASA">
-// //     Copyright (c) Bouvet ASA. All rights reserved.
-// // </copyright>
-// // <summary></summary>
-// // ***********************************************************************
 
 #endregion
 
