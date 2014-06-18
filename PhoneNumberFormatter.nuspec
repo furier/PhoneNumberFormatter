@@ -1,19 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>PhoneNumberFormatter</id>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
         <title>Phone Number Formatter</title>
         <authors>Sander Struijk</authors>
         <owners>Sander Struijk</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A Library for easy phone number formatting according to configurations.</description>
+        <releaseNotes>1.0.4
+
+    - Compiled for release mode</releaseNotes>
         <tags>phone number format</tags>
     </metadata>
     <files>
         <file src="CountryCodes.txt" target="content\CountryCodes.txt" />
-        <file src="NetCore\Deploy\PhoneNumberFormatter.dll" target="lib\net45\PhoneNumberFormatter.dll" />
-        <file src="Win8.1\Deploy\PhoneNumberFormatter.dll" target="lib\netcore451\PhoneNumberFormatter.dll" />
+        <file src="NetCore\PhoneNumberFormatter.NetCore\bin\Release\PhoneNumberFormatter.dll" target="lib\net45\PhoneNumberFormatter.dll" />
+        <file src="Win8.1\PhoneNumberFormatter.Win8.1\bin\Release\PhoneNumberFormatter.dll" target="lib\netcore451\PhoneNumberFormatter.dll" />
         <file src="tools\install.ps1" target="tools\install.ps1" />
     </files>
 </package>
